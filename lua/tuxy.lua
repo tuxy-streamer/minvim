@@ -802,3 +802,17 @@ map("n", "<Leader>dk", dap.up, { desc = "DAP: Move Up Frame" })
 map("n", "<Leader>dl", dap.run_last, { desc = "DAP: Run Last" })
 map("n", "<Leader>ds", dap.session, { desc = "DAP: Show Session Info" })
 map("n", "<Leader>dw", dap_widgets.hover, { desc = "DAP: Hover Widget" })
+
+-- Obsidian
+vim.pack.add({ { src = "https://github.com/obsidian-nvim/obsidian.nvim" } })
+require("obsidian").setup({
+	legacy_commands = false,
+	workspaces = {
+		{
+			name = "personal",
+			path = "/storage/personal/notes/",
+		},
+	},
+})
+map("n", "<Leader>oo", "<cmd>Obsidian<CR>", { desc = "Obsidian: Obsidian Subcommands" })
+map("n", "<Leader>ob", "<cmd>Obsidian backlinks<CR>", { desc = "Obsidian: Obsidian Backlinks" })
