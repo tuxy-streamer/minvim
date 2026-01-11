@@ -194,7 +194,7 @@ require("nvim-treesitter").setup({
 
 -- Autocompletion (Blink)
 vim.pack.add({
-	{ src = "https://github.com/saghen/blink.cmp", version = "1.*" },
+	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 })
