@@ -1,4 +1,5 @@
 local vim = vim
+
 --  NOTE: Autocmds
 
 -- Highlight when yanking
@@ -230,80 +231,161 @@ vim.pack.add({
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 })
 
+local langs = {
+	bash = {
+		lsp = "bashls",
+		linter = { "shellcheck", "shellharden" },
+		formatter = "shfmt",
+	},
+	c = {
+		lsp = "clangd",
+		formatter = "clang-format",
+	},
+	css = {
+		linter = "stylelint",
+	},
+	git = {
+		linter = { "gitleaks", "gitlint" },
+	},
+	go = {
+		lsp = "gopls",
+		linter = { "golangci-lint", "goimports-reviser", "golines", "gomodifytags", "gotests" },
+		formatter = "gofumpt",
+	},
+	html = {
+		linter = "htmlhint",
+	},
+	js = {
+		linter = "eslint_d",
+		formatter = "prettier",
+	},
+	json = {
+		linter = { "jsonlint", "fixjson" },
+	},
+	lua = {
+		lsp = "lua_ls",
+		linter = "luacheck",
+		formatter = "stylua",
+	},
+	make = { linter = "checkmake" },
+	markdown = {
+		lsp = "marksman",
+		linter = "markdownlint-cli2",
+		formatter = "prettier",
+	},
+	python = {
+		lsp = "ruff",
+		linter = { "bandit", "mypy", "flake8" },
+		formatter = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+	},
+	rust = {
+		lsp = "rust_analyzer",
+		linter = { "clippy" },
+		formatter = "rustfmt",
+	},
+	sql = {
+		linter = { "sqlfluff", "sqruff" },
+		formatter = "pgformatter",
+	},
+	toml = {
+		linter = "tombi",
+	},
+	yaml = {
+		lsp = "yamlls",
+		linter = { "yamllint", "yamlfix" },
+		formatter = "yamlfmt",
+	},
+	zig = {
+		lsp = "zls",
+	},
+}
+
+local function collectLsp(src, dest)
+	for k, v in pairs(src) do
+		if k == "lsp" then
+			if type(v) == "string" then
+				table.insert(dest, v)
+			elseif type(v) == "table" then
+				collectLsp(v, dest)
+			end
+		elseif type(v) == "table" then
+			collectLsp(v, dest)
+		end
+	end
+	return dest
+end
+
+local function collectLinter(src, dest)
+	for k, v in pairs(src) do
+		if k == "linter" then
+			if type(v) == "string" then
+				table.insert(dest, v)
+			elseif type(v) == "table" then
+				for _, item in pairs(v) do
+					if type(item) == "string" then
+						table.insert(dest, item)
+					elseif type(item) == "table" then
+						collectLinter(item, dest)
+					end
+				end
+			end
+		elseif type(v) == "table" then
+			collectLinter(v, dest)
+		end
+	end
+end
+
+local function collectFormatter(src, dest)
+	for k, v in pairs(src) do
+		if k == "formatter" then
+			if type(v) == "string" then
+				table.insert(dest, v)
+			elseif type(v) == "table" then
+				for _, item in pairs(v) do
+					if type(item) == "string" then
+						table.insert(dest, item)
+					elseif type(item) == "table" then
+						collectFormatter(item, dest)
+					end
+				end
+			end
+		elseif type(v) == "table" then
+			collectFormatter(v, dest)
+		end
+	end
+end
+
+local lsptbl = {}
+local lintertbl = {}
+local formattertbl = {}
+collectLsp(langs, lsptbl)
+collectLinter(langs, lintertbl)
+collectFormatter(langs, formattertbl)
+
+local toolstbl = {}
+for _, v in ipairs(lintertbl) do
+	table.insert(toolstbl, v)
+end
+for _, v in ipairs(formattertbl) do
+	table.insert(toolstbl, v)
+end
+
 local lspconfig = require("lspconfig")
 local capabilities =
 	vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), blink_cmp.get_lsp_capabilities())
-
 require("mason").setup()
+
 require("mason-tool-installer").setup({
-	ensure_installed = {
-		-- Assembly
-		"asmfmt",
-		-- Go
-		"gofumpt",
-		"golangci-lint",
-		"goimports-reviser",
-		"golines",
-		"gomodifytags",
-		"gotests",
-		-- Python
-		-- Lua
-		"luacheck",
-		"stylua",
-		-- Git
-		"gitleaks",
-		"gitlint",
-		-- Rust
-		"codelldb",
-		-- Js/Ts
-		"prettierd",
-		"eslint_d",
-		-- YAML
-		"yamllint",
-		"yamlfix",
-		"yamlfmt",
-		-- JSON
-		"jsonlint",
-		"fixjson",
-		-- Bash
-		"shellcheck",
-		"shellharden",
-		"shfmt",
-		-- Make
-		"checkmake",
-		-- CSS
-		"stylelint",
-		-- Markdown
-		"markdownlint-cli2",
-		-- Html
-		"htmlhint",
-		-- C/C++
-		"clang-format",
-		-- SQL
-		"sqlfluff",
-		"sqruff",
-		"pgformatter",
-	},
+	ensure_installed = toolstbl,
 	auto_update = true,
 	run_on_start = true,
 	debounce_hours = 10,
 })
 
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"asm_lsp",
-		"lua_ls",
-		"rust_analyzer",
-		"gopls",
-		"ruff",
-		"marksman",
-		"bashls",
-		"jsonls",
-		"zls",
-		"clangd",
-	},
+	ensure_installed = lsptbl,
 	handlers = {
-		function(server_name) -- default handler (optional)
+		function(server_name)
 			lspconfig[server_name].setup({
 				capabilities = capabilities,
 			})
@@ -349,18 +431,7 @@ vim.lsp.buf.hover({
 	border = "rounded",
 })
 
-vim.lsp.enable({
-	"asm_lsp",
-	"lua_ls",
-	"rust_analyzer",
-	"gopls",
-	"ruff",
-	"marksman",
-	"bashls",
-	"jsonls",
-	"zls",
-	"clangd",
-})
+vim.lsp.enable(lsptbl)
 
 map("n", "gd", ":Telescope lsp_definitions<CR>", { desc = "LSP: Search definition in telescope" })
 map("n", "gr", ":Telescope lsp_references<CR>", { desc = "LSP: Show references in telescope" })
