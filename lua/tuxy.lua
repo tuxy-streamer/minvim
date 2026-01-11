@@ -119,28 +119,8 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Terminal: Exit insert mode" })
 --  NOTE: Plugins
 
 -- Colorscheme
--- vim.pack.add({ { src = "https://github.com/rebelot/kanagawa.nvim.git" } })
--- vim.cmd("colorscheme kanagawa")
--- vim.pack.add({ { src = "https://github.com/ramojus/mellifluous.nvim.git" } })
--- vim.cmd("colorscheme mellifluous")
-
--- vim.pack.add({ { src = "https://github.com/ellisonleao/gruvbox.nvim.git" } })
--- vim.cmd("colorscheme gruvbox")
-
--- vim.pack.add({ { src = "https://github.com/sainnhe/gruvbox-material.git" } })
--- vim.cmd("colorscheme gruvbox-material")
-
--- vim.pack.add({ { src = "https://github.com/sainnhe/everforest.git" } })
--- vim.cmd("colorscheme everforest")
-
--- vim.pack.add({
--- 	{ src = "https://github.com/zenbones-theme/zenbones.nvim.git" },
--- 	{ src = "https://github.com/rktjmp/lush.nvim" },
--- })
--- vim.cmd("colorscheme kanagawabones")
-
-vim.pack.add({ { src = "https://github.com/p00f/alabaster.nvim" } })
-vim.cmd("colorscheme alabaster")
+vim.pack.add({ { src = "https://github.com/catppuccin/nvim" } })
+vim.cmd("colorscheme catppuccin-mocha")
 
 --  HACK: Do Not Remove
 -- (Override colorscheme border).
