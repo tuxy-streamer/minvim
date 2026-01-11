@@ -575,7 +575,7 @@ require("iron.core").setup({
 				env = { PYTHON_BASIC_REPL = "1" },
 			},
 		},
-		repl_filetype = function(bufnr, ft)
+		repl_filetype = function(_, ft)
 			return ft
 		end,
 		dap_integration = true,
