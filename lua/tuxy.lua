@@ -541,12 +541,14 @@ require("render-markdown").setup({
 	},
 })
 
--- Mini (Pairs, Indentscope)
+-- Mini (Pairs, Indentscope, Icons)
 vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.pairs" },
 	{ src = "https://github.com/echasnovski/mini.indentscope" },
+	{ src = "https://github.com/nvim-mini/mini.icons" },
 })
 require("mini.pairs").setup()
+require("mini.icons").setup()
 require("mini.indentscope").setup({
 	draw = {
 		delay = 0,
