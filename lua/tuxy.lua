@@ -109,7 +109,8 @@ opt.bufhidden = "wipe"
 local map = vim.keymap.set
 
 -- Default
-map("n", "<Leader>o", ":update<CR> :source<CR>", { desc = "Default: Update and Source current file" })
+map("n", "<Leader>vu", ":update<CR> :source<CR>", { desc = "Default: Update and Source current file" })
+map("n", "<Leader>vr", ":restart<CR>", { desc = "Default: Restart neovim" })
 map("n", "<Esc>", ":nohlsearch<CR>", { desc = "Default: Clear search highlight" })
 
 -- Terminal
