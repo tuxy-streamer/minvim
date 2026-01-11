@@ -437,8 +437,7 @@ map("n", "gd", ":Telescope lsp_definitions<CR>", { desc = "LSP: Search definitio
 map("n", "gr", ":Telescope lsp_references<CR>", { desc = "LSP: Show references in telescope" })
 map("n", "gws", ":Telescope lsp_workspace_symbols<CR>", { desc = "LSP: Show workspace symbols in telescope" })
 map("n", "gds", ":Telescope lsp_document_symbols<CR>", { desc = "LSP: Show document symbols in telescope" })
---  FIX: Matching key conflict
-map("n", "<Leader>rr", ":LspRestart<CR>", { desc = "LSP: Restart Server" })
+map("n", "<Leader>grr", ":LspRestart<CR>", { desc = "LSP: Restart Server" })
 map({ "n", "v" }, "<Leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code Action" })
 map("n", "K", function()
 	vim.lsp.buf.hover({
