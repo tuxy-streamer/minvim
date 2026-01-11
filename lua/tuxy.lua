@@ -474,7 +474,9 @@ conform.setup({
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
 		end
-		return { timeout_ms = 500, lsp_format = "fallback" }
+		vim.schedule(function()
+			conform.format({ bufnr = bufnr, timeout_ms = 500, lsp_format = "fallback" })
+		end)
 	end,
 })
 
