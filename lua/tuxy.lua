@@ -90,6 +90,20 @@ opt.iskeyword:append("-")
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 opt.modifiable = true
 
+-- Startup & Redraw
+opt.timeoutlen = 300
+opt.updatetime = 250
+opt.redrawtime = 1500
+opt.regexpengine = 2
+-- Treesitter performance
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+
+-- Buffer loading
+opt.hidden = true
+opt.bufhidden = "wipe"
+
 --   NOTE: Keymaps
 
 local map = vim.keymap.set
