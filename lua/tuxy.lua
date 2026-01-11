@@ -173,7 +173,7 @@ map("n", "<Leader>sg", ":Telescope git_files<CR>", { desc = "Telescope: Search g
 
 -- Treesitter
 vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter" } })
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
 	ensure_installed = {
 		"vimdoc",
 		"javascript",
@@ -189,10 +189,7 @@ require("nvim-treesitter.configs").setup({
 	indent = {
 		enable = true,
 	},
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = { "markdown" },
-	},
+	highlight = { enable = true },
 })
 
 -- Autocompletion (Blink)
