@@ -732,7 +732,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-neotest/neotest-python" },
 	{ src = "https://github.com/nvim-neotest/neotest-jest" },
 	{ src = "https://github.com/rcasia/neotest-bash" },
-	{ src = "https://github.com/nvim-neotest/neotest-go" },
+	{ src = "https://github.com/fredrikaverpil/neotest-golang" },
+	{ src = "https://github.com/leoluz/nvim-dap-go" },
 	{ src = "https://github.com/marilari88/neotest-vitest" },
 })
 
@@ -742,7 +743,8 @@ require("neotest").setup({
 		require("neotest-jest"),
 		require("neotest-vitest"),
 		require("neotest-bash"),
-		require("neotest-go"),
+		require("neotest-golang"),
+		require("neotest-golang"),
 	},
 })
 map("n", "<Leader>tr", ":Neotest run<CR>", { desc = "Neotest: Run test" })
