@@ -577,19 +577,27 @@ require("render-markdown").setup({
 	sign = { enabled = true },
 	heading = {
 		enabled = true,
-		render_modes = false,
-		atx = true,
-		setext = false,
+		atx = false,
 		sign = true,
-		icons = {},
-		position = "inline",
+		icons = { "", "", "", "", "", "" },
+		position = "overlay",
+		signs = { "󰫎 " },
 		width = "block",
-		right_pad = 1,
 		border = false,
-		border_virtual = false,
-		border_prefix = false,
 		above = "",
 		below = "",
+	},
+	checkbox = {
+		unchecked = {
+			icon = "",
+			highlight = "RenderMarkdownUnchecked",
+			scope_highlight = nil,
+		},
+		checked = {
+			icon = "󰱒",
+			highlight = "RenderMarkdownChecked",
+			scope_highlight = nil,
+		},
 	},
 })
 
