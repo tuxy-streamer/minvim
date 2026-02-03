@@ -500,7 +500,7 @@ map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: Go to Declaration" })
 map("n", "<Leader>d", vim.diagnostic.open_float, { desc = "LSP: Show Diagnostics" })
 map("n", "<Leader>rn", vim.lsp.buf.rename, { desc = "LSP: Rename Symbol" })
 
--- Formatting
+-- Formatting (Conform)
 vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
 local conform = require("conform")
 conform.setup({
@@ -515,21 +515,16 @@ conform.setup({
 		go = { "gofumpt", "goimports-reviser", "golines", "gomodifytags", "gotests" },
 		yaml = { "yamlfix", "yamlfmt" },
 		json = { "fixjson", "prettier" },
-		bash = { "shellharden", "shfmt" },
+		bash = { "shellharden" },
 		markdown = { "prettier" },
 		css = { "prettier" },
 		sql = { "pgformatter" },
 		assembly = { "asmfmt" },
 		toml = { "tombi" },
 	},
-	format_on_save = function(bufnr)
-		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-			return
-		end
-		vim.schedule(function()
-			conform.format({ bufnr = bufnr, timeout_ms = 500, lsp_format = "fallback" })
-		end)
-	end,
+	map("n", "<leader>f", function()
+		require("conform").format({ bufnr = 0 })
+	end),
 })
 
 -- Linting
