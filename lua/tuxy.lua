@@ -267,7 +267,7 @@ blink_cmp.setup({
 	signature = { enabled = true },
 	snippets = { preset = "luasnip" },
 	sources = {
-		default = { "lsp", "buffer", "snippets", "path" },
+		default = { "lsp", "buffer", "snippets", "path", "obsidian" },
 		providers = {
 			dadbod = { module = "vim_dadbod_completion.blink" },
 			lsp = { fallbacks = {} },
@@ -321,7 +321,7 @@ local langs = {
 	},
 	make = { linter = "checkmake" },
 	markdown = {
-		lsp = "marksman",
+		lsp = "markdown-oxide",
 		linter = "markdownlint-cli2",
 		formatter = "prettier",
 	},
