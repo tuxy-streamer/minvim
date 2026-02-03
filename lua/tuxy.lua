@@ -554,6 +554,11 @@ lint.linters.mypy.args = {
 	"--strict",
 }
 
+lint.linters.golangcilint.args = {
+	"-c ",
+	"~/.config/devtools-config/golangci.json",
+}
+
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave" }, {
 	callback = function()
 		require("lint").try_lint()
