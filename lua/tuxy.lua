@@ -120,8 +120,8 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Terminal: Exit insert mode" })
 --  NOTE: Plugins
 
 -- Colorscheme
-vim.pack.add({ { src = "https://github.com/catppuccin/nvim" } })
-vim.cmd("colorscheme catppuccin-mocha")
+vim.pack.add({ { src = "https://github.com/rebelot/kanagawa.nvim" } })
+vim.cmd("colorscheme kanagawa")
 
 --  HACK: Do Not Remove
 -- (Override colorscheme border).
