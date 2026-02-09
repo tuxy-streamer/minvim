@@ -321,7 +321,7 @@ local langs = {
 	},
 	make = { linter = "checkmake" },
 	markdown = {
-		lsp = "markdown-oxide",
+		lsp = "markdown_oxide",
 		linter = "markdownlint-cli2",
 		formatter = "prettier",
 	},
