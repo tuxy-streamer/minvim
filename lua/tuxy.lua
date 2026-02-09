@@ -878,3 +878,11 @@ require("obsidian").setup({
 })
 map("n", "<Leader>oo", "<cmd>Obsidian<CR>", { desc = "Obsidian: Obsidian Subcommands" })
 map("n", "<Leader>ob", "<cmd>Obsidian backlinks<CR>", { desc = "Obsidian: Obsidian Backlinks" })
+
+-- Fidget
+vim.pack.add({{src = "https://github.com/j-hui/fidget.nvim"}})
+require("fidget").setup({})
+
+-- Colorizer
+vim.pack.add({{src = "https://github.com/norcalli/nvim-colorizer.lua"}})
+require("colorizer").setup({})
