@@ -80,6 +80,10 @@
       "rev": "d7f9461727751fb07f82011051338a9aba07581d",
       "src": "https://github.com/danymat/neogen"
     },
+    "neogit": {
+      "rev": "0ea6b87ae19e8e5a235c682f8db1305774824f9b",
+      "src": "https://github.com/NeogitOrg/neogit"
+    },
     "neotest": {
       "rev": "deadfb1af5ce458742671ad3a013acb9a6b41178",
       "src": "https://github.com/nvim-neotest/neotest"
